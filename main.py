@@ -59,15 +59,15 @@ def csv_writer_soldier(rows_num):
 
 def csv_writer_reserves(rows_num):
     with open('reserves.csv', mode='w') as csv_file:
-        fieldnames = ['Run key soldiers',  'Salary per day',
-                      'Reserve contact', 'Days served', 'Date-last recruited', 'Reserve training']
+        fieldnames = ['Run key reserves','Run key soldiers',  'Salary per day',
+                      'Reserve contact', 'Days served', 'Last recruited Date', 'Reserve training']
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
 
         Reserve_training_list = ['grandes', 'sniper', 'explosives', 'heavy machine-gun',
                                  'scout', 'communication', 'driver', 'anti-air', 'commander', 'medic']
 
-
+        j=0
         for i in range(0,rows_num,6):
             salary_per_day = random.randint(200, 800)
             days_served = random.randint(1, 1000)
@@ -77,10 +77,10 @@ def csv_writer_reserves(rows_num):
             reserve_training = random.choice(Reserve_training_list)
 
             writer.writerow(
-                {'Run key soldiers':i, 'Salary per day': salary_per_day,
+                {'Run key reserves':j,'Run key soldiers':i, 'Salary per day': salary_per_day,
                  'Reserve contact': contact_phone, 'Days served': days_served
-                    , 'Date-last recruited': date_last_recruited, 'Reserve training': reserve_training})
-
+                    , 'Last recruited Date': date_last_recruited, 'Reserve training': reserve_training})
+            j+=1
 
 def csv_writer_adviser(rows_num):
     with open('adviser.csv', mode='w') as csv_file:
@@ -113,4 +113,4 @@ if __name__ == '__main__':
     rows_nums = 20000
     csv_writer_soldier(rows_nums)
     csv_writer_reserves(rows_nums)
-    # csv_writer_adviser(rows_nums)
+     #csv_writer_adviser(rows_nums)
