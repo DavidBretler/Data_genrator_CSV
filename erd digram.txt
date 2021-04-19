@@ -2,11 +2,11 @@ CREATE TABLE Soldier
 (
   Run_key_soldier INT NOT NULL,
   Id INT NOT NULL,
-  Name VARCHAR NOT NULL,
-  Rank VARCHAR NOT NULL,
+  Name CHAR NOT NULL,
+  Rank CHAR NOT NULL,
   Salary INT NOT NULL,
   Run_key_weapon INT NOT NULL,
-  Regular_Or_permanent VARCHAR NOT NULL,
+  Regular_Or_permanent CHAR NOT NULL,
   Recruitment_date DATE NOT NULL,
   Release_date DATE NOT NULL,
   PRIMARY KEY (Run_key_soldier),
@@ -17,11 +17,11 @@ CREATE TABLE Adviser
 (
   Run_key_adviser INT NOT NULL,
   Id INT NOT NULL,
-  Name VARCHAR NOT NULL,
-  Certification VARCHAR NOT NULL,
+  Name CHAR NOT NULL,
+  Certification CHAR NOT NULL,
   Salary INT NOT NULL,
-  Force VARCHAR NOT NULL,
-  Specialty VARCHAR NOT NULL,
+  Force CHAR NOT NULL,
+  Specialty CHAR NOT NULL,
   PRIMARY KEY (Run_key_adviser),
   UNIQUE (Id)
 );
@@ -32,8 +32,8 @@ CREATE TABLE Reserves
   Salary_per_day INT NOT NULL,
   Reserve_contact Phone NOT NULL,
   Days_served INT NOT NULL,
-  Date-last_recruited DATE NOT NULL,
-  Reserve_training VARCHAR NOT NULL,
+  Last_recruited_Date_ DATE NOT NULL,
+  Reserve_training CHAR NOT NULL,
   Run_key_soldier INT NOT NULL,
   FOREIGN KEY (Run_key_soldier) REFERENCES Soldier(Run_key_soldier)
 );
