@@ -11,9 +11,10 @@ def random_with_N_digits(n):
 
 
 start_date = datetime.date(1990, 1, 1)
-end_date = datetime.date(2018, 12, 30)
+end_date = datetime.date(2010, 12, 30)
 time_between_dates = end_date - start_date
 days_between_dates = time_between_dates.days
+
 
 ranks = ['Aluf', 'Tat aluf', 'Aluf mishne', 'Sgan aluf', 'Rav seren'
     , 'Seren', 'Rav samal rishon', 'Rav samal', 'Samal', 'Rav turai', 'Turai'
@@ -22,12 +23,20 @@ ranks = ['Aluf', 'Tat aluf', 'Aluf mishne', 'Sgan aluf', 'Rav seren'
     , 'Seren', 'Rav samal rishon', 'Rav samal', 'Samal', 'Rav turai', 'Turai']
 
 
+
+
 def csv_writer_soldier(rows_num):
+    List = []
     with open('soldier.csv', mode='w') as csv_file:
         fieldnames = ['Run key soldier', 'Id', 'Name', 'Rank', 'Salary',
                       'Weapon id', 'Regular Or permanent', 'Recruitment date', 'Release date']
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
+
+        start_date = datetime.date(1990, 1, 1)
+        end_date = datetime.date(2018, 12, 30)
+        time_between_dates = end_date - start_date
+        days_between_dates = time_between_dates.days
 
         for i in range(rows_num):
             id = random.randint(1000000, 299999999)
@@ -35,6 +44,7 @@ def csv_writer_soldier(rows_num):
             salary = random.randint(1500, 10000)
             weapon_id = random.randint(10000, 99999)
             rank = random.choice(ranks)
+
 
             random_number_of_days = random.randrange(days_between_dates)
             recruitment_date = start_date + datetime.timedelta(days=random_number_of_days)
@@ -49,7 +59,7 @@ def csv_writer_soldier(rows_num):
 
 def csv_writer_reserves(rows_num):
     with open('reserves.csv', mode='w') as csv_file:
-        fieldnames = ['Run key reserves', 'Id', 'Name', 'Rank', 'Salary per day',
+        fieldnames = ['Run key soldiers',  'Salary per day',
                       'Reserve contact', 'Days served', 'Date-last recruited', 'Reserve training']
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
@@ -57,19 +67,17 @@ def csv_writer_reserves(rows_num):
         Reserve_training_list = ['grandes', 'sniper', 'explosives', 'heavy machine-gun',
                                  'scout', 'communication', 'driver', 'anti-air', 'commander', 'medic']
 
-        for i in range(rows_num):
-            id = random.randint(3000000, 599999999)
-            name = names.get_full_name()
+
+        for i in range(0,rows_num,6):
             salary_per_day = random.randint(200, 800)
             days_served = random.randint(1, 1000)
-            rank = random.choice(ranks)
             contact_phone = '050-' + str(random_with_N_digits(7))
-            random_number_of_days = random.randrange(days_between_dates)
-            date_last_recruited = start_date + datetime.timedelta(days=random_number_of_days)
+            random_number_of_days = random.randrange(300, 3000)
+            date_last_recruited = end_date+ datetime.timedelta(days=random_number_of_days)
             reserve_training = random.choice(Reserve_training_list)
 
             writer.writerow(
-                {'Run key reserves': i, 'Id': id, 'Name': name, 'Rank': rank, 'Salary per day': salary_per_day,
+                {'Run key soldiers':i, 'Salary per day': salary_per_day,
                  'Reserve contact': contact_phone, 'Days served': days_served
                     , 'Date-last recruited': date_last_recruited, 'Reserve training': reserve_training})
 
@@ -103,6 +111,6 @@ def csv_writer_adviser(rows_num):
 
 if __name__ == '__main__':
     rows_nums = 20000
-    #csv_writer_soldier(rows_nums)
-    #csv_writer_reserves(rows_nums)
-    csv_writer_adviser(rows_nums)
+    csv_writer_soldier(rows_nums)
+    csv_writer_reserves(rows_nums)
+    # csv_writer_adviser(rows_nums)
