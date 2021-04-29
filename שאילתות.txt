@@ -1,0 +1,42 @@
+1.
+
+ 
+ SELECT ID ,Name,certification,salary,force
+FROM adviser
+where SPECIALTY= 'Gaza' and
+ salary >
+    (SELECT  AVG(salary) 
+     FROM adviser)
+     ;
+
+
+2.
+
+SELECT  certification,count(*)as num_of_people,avg(salary) as avarege_salary
+FROM adviser
+GROUP by certification
+
+3.
+המלואיניקים ששירתו מעל 100 ימים והשתחררו אחרי 2013
+0.435 
+3 שדות
+1341 שורות
+
+select  id ,name,rank from soldier 
+where(release_date) > SYSDATE - 4500 and
+ run_key_soldier in 
+(select run_key_soldier from reserves
+ where days_served >100 ) 
+
+4.
+מציאת החיילים המשרתים במילואים בדרגות אלוף אל"מ ורב"ס שעשו התמחותמילואים בתקשורת או חומרי נפץ ומרויחים שכר נמוך להכשרתם ודרגתם
+select  id ,name,salary_per_day ,rank ,reserve_training from soldier natural join reserves
+
+where ((rank ='Aluf' and salary_per_day<600)and
+( (RESERVE_TRAINING = 'explosives' )or(RESERVE_TRAINING = 'communication')))
+ 
+ or  ((rank ='Sgan aluf' and salary_per_day<500)and
+ ( (RESERVE_TRAINING = 'explosives' )or(RESERVE_TRAINING = 'communication')))
+ 
+ or ((rank ='Rav seren' and salary_per_day<400)and
+ ( (RESERVE_TRAINING = 'explosives' )or(RESERVE_TRAINING = 'communication' )))
